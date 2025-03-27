@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "team_users",
+  "info": {
+    "singularName": "team-user",
+    "pluralName": "team-users",
+    "displayName": "Team User"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Role": {
+      "type": "string",
+      "required": true
+    },
+    "Content": {
+      "type": "richtext",
+      "required": true
+    },
+    "Twitter_Link": {
+      "type": "string"
+    },
+    "Linkedin_Link": {
+      "type": "string"
+    },
+    "Profile_Image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "Profile_Avatar": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

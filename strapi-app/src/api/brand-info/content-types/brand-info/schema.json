@@ -1,0 +1,68 @@
+{
+  "kind": "singleType",
+  "collectionName": "brand_infos",
+  "info": {
+    "singularName": "brand-info",
+    "pluralName": "brand-infos",
+    "displayName": "Brand Info"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Brand_Name": {
+      "type": "string"
+    },
+    "Brand_About": {
+      "type": "richtext"
+    },
+    "Address": {
+      "type": "text"
+    },
+    "Email": {
+      "type": "email"
+    },
+    "Phone": {
+      "min": "10",
+      "max": "10",
+      "required": false,
+      "type": "biginteger"
+    },
+    "Logo_Light": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "Logo_Dark": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "Favicon_Icon": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "X_Link": {
+      "type": "string"
+    },
+    "Facebook_Link": {
+      "type": "string"
+    },
+    "Instagram_Link": {
+      "type": "string"
+    },
+    "Linkedin_Link": {
+      "type": "string"
+    }
+  }
+}
