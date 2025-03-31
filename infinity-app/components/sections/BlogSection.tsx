@@ -1,8 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import BlogPostImg from '@/public/images/BlogPost.png'
-import { Button } from "./ui/button"
-import SectionWrapper from "./SectionWrapper"
+import { Button } from "../ui/button"
+import SectionWrapper from "../SectionWrapper"
 
 export default function BlogSection() {
     const blogPosts = [

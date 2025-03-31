@@ -1,9 +1,9 @@
 import Image, { StaticImageData } from "next/image"
 
-import TeamUser1 from '@/public/images/TeamUser1.png'
+import Team1 from '@/public/images/James Lee.png'
 import { cn } from "@/lib/utils"
-import SectionWrapper from "./SectionWrapper"
-import { BendArrowDown } from "./icons.svg"
+import SectionWrapper from "../SectionWrapper"
+import { BendArrowDown } from "../icons.svg"
 
 export default function TeamSection() {
     return (
@@ -21,9 +21,9 @@ export default function TeamSection() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                <TeamUserCard img={TeamUser1} name="Eddy Denison" role="CFO" content="Our CFO brings strategic vision and financial expertise, guiding our growth and ensuring long-term stability" />
-                <TeamUserCard img={TeamUser1} name="Mark Robben" role="CEO" content="Our CEO leads with vision and dedication, driving innovation and inspiring our team to achieve new heights" contentFirst={true} />
-                <TeamUserCard img={TeamUser1} name="John.J Dawson" role="CTO" content="Our CTO spearheads technology and innovation, ensuring our solutions are cutting-edge and future-ready" />
+                <TeamUserCard img={Team1} name="Eddy Denison" role="CFO" content="Our CFO brings strategic vision and financial expertise, guiding our growth and ensuring long-term stability" />
+                <TeamUserCard img={Team1} name="Mark Robben" role="CEO" content="Our CEO leads with vision and dedication, driving innovation and inspiring our team to achieve new heights" contentFirst={true} />
+                <TeamUserCard img={Team1} name="John.J Dawson" role="CTO" content="Our CTO spearheads technology and innovation, ensuring our solutions are cutting-edge and future-ready" />
             </div>
         </SectionWrapper>
     )

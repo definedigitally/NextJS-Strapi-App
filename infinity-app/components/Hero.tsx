@@ -6,9 +6,8 @@ import Link from "next/link"
 import { Facebook, Instagram, Linkedin, Globe } from "lucide-react"
 import CursorFollower from "./cursor-follower"
 import Logo from "@/public/images/main-logo.png"
-import DrawerHeader from "./drawer-header"
 import AnimatedText from "./animated-text"
-// import CursorFollower from "@/components/cursor-follower"
+import Header from "./Header"
 
 export default function Hero() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -30,7 +29,7 @@ export default function Hero() {
             {/* Cursor follower */}
             <CursorFollower position={mousePosition} />
 
-            <DrawerHeader />
+            <Header />
 
             {/* Hero content */}
             <div className="container mx-auto px-8 pt-12 md:pt-24">

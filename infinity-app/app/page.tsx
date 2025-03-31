@@ -1,10 +1,12 @@
-import BlogSection from "@/components/BlogSection";
-import FatfishHero from "@/components/InfoHeroIntro";
-import { Footer } from "@/components/Footer";
+import BlogSection from "@/components/sections/BlogSection";
+import { Footer } from "@/components/sections/Footer";
 // import Hero from "@/components/hero";
-import TeamSection from "@/components/TeamSection";
-import Team1 from '@/public/images/Team1.png'
-import { TeamShowcase } from "@/components/TeamShowcase";
+import TeamSection from "@/components/sections/TeamSection";
+import Team1 from '@/public/images/James Lee.png'
+import { TeamShowcase } from "@/components/sections/TeamShowcase";
+import Hero from "@/components/Hero";
+import InfoHeroIntro from "@/components/sections/InfoHeroIntro";
+import { Beyond9To5 } from "@/components/sections/Beyond9To5";
 const teamMembers = [
   {
     name: "FLIPDD",
@@ -47,8 +49,8 @@ const teamMembers = [
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* <Hero /> */}
-      <FatfishHero />
+      <Hero />
+      <InfoHeroIntro />
       <TeamShowcase
         title={
           <>
@@ -58,7 +60,7 @@ export default function Home() {
         subtitle="Yes, that's interesting!"
         teamMembers={teamMembers}
       />
-      <TeamShowcase
+      <Beyond9To5
         title={
           <>
             WANNA KNOW ABOUT THE <br /> STARTUPS I&apos;VE BUILT AND UNBUILT?
