@@ -1,10 +1,10 @@
 'use client'
 
 import { ReactNode, useMemo, useRef } from "react"
-import { BendArrowDown } from "../icons.svg";
 import { TeamMemberCard, type TeamMemberProps } from "../team-member-card"
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { BendArrowDown } from "../Icons";
 
 interface TeamSectionProps {
     title: ReactNode | string

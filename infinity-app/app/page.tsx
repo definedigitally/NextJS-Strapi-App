@@ -4,9 +4,10 @@ import { Footer } from "@/components/sections/Footer";
 import TeamSection from "@/components/sections/TeamSection";
 import Team1 from '@/public/images/James Lee.png'
 import { TeamShowcase } from "@/components/sections/TeamShowcase";
-import Hero from "@/components/Hero";
 import InfoHeroIntro from "@/components/sections/InfoHeroIntro";
 import { Beyond9To5 } from "@/components/sections/Beyond9To5";
+import HomeHero from "@/components/sections/HomeHero";
+import Header from "@/components/Header";
 const teamMembers = [
   {
     name: "FLIPDD",
@@ -49,7 +50,8 @@ const teamMembers = [
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Hero />
+      <Header />
+      <HomeHero/>
       <InfoHeroIntro />
       <TeamShowcase
         title={

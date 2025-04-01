@@ -4,9 +4,10 @@ import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { gsap } from "gsap"
-import { X, Facebook, Instagram, Linkedin, Globe, AlignJustify } from "lucide-react"
+import { X, Facebook, Instagram, Linkedin, Globe } from "lucide-react"
 import SkullImage from '@/public/images/skull.webp'
 import LogoImage from '@/public/images/main-logo.png'
+import { Hamburger } from "./Icons"
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false)
@@ -101,27 +102,41 @@ export default function Header() {
 
     return (
         <>
-            <header className="fixed top-0 left-0 w-full z-[10] px-8 py-6 flex justify-between items-center">
-                <div ref={logoRef} className="z-50">
-                    <Link href="/" className="block">
-                        <Image
-                            src={LogoImage}
-                            alt="Fatfish Logo"
-                            width={120}
-                            height={40}
-                            className="h-10 w-auto"
-                        />
-                    </Link>
-                </div>
+            <header className="fixed top-0 left-0 w-full z-[10] px-8 py-6">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-between items-center">
+                        <div ref={logoRef} className="z-50">
+                            <Link href="/" className="block">
+                                <Image
+                                    src={LogoImage}
+                                    alt="Fatfish Logo"
+                                    width={120}
+                                    height={40}
+                                    className="h-10 w-auto"
+                                />
+                            </Link>
+                        </div>
 
-                <button
-                    ref={hamburgerRef}
-                    onClick={toggleDrawer}
-                    className={`z-50 flex flex-col justify-center items-center cursor-pointer w-10 h-10 focus:outline-none ${isOpen ? "invisible" : "visible"}`}
-                    aria-label="Toggle menu"
-                >
-                    <AlignJustify />
-                </button>
+                        <div className="flex items-center justify-end gap-[90px]">
+                            <div className="hidden md:flex items-center space-x-8">
+                                <Link href="#" className="text-[#222222] hover:text-gray-900 text-sm">My Ventures</Link>
+                                <Link href="#" className="text-[#222222] hover:text-gray-900 text-sm">Products</Link>
+                                <Link href="#" className="text-[#222222] hover:text-gray-900 text-sm">Blogs</Link>
+                                <Link href="#" className="text-[#222222] hover:text-gray-900 text-sm">9-5</Link>
+                                <Link href="#" className="text-[#222222] hover:text-gray-900 text-sm">9-5</Link>
+                            </div>
+
+                            <button
+                                ref={hamburgerRef}
+                                onClick={toggleDrawer}
+                                className={`z-50 flex flex-col justify-center items-center cursor-pointer w-10 h-10 focus:outline-none ${isOpen ? "invisible" : "visible"}`}
+                                aria-label="Toggle menu"
+                            >
+                                <Hamburger />
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </header>
 
             <div ref={drawerRef} className="fixed top-0 left-0 w-full h-screen bg-[#cb413f] z-[20] opacity-0">

@@ -41,7 +41,6 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  /* --1440: 1440px; */
   --brand-red: var(--brand-red)
 }
 
@@ -82,6 +81,11 @@
   --img-shadow: 0px 0px 60px 0px #0000000F;
   --card-shadow: 0px 0px 60px 0px #0000001A;
   --border-brand-dark: 1px solid #FFFFFF14;
+  --wrapper_margin: 2.5rem;
+  --wrapper_w: calc(100vw - var(--wrapper_margin)* 2);
+  --wrapper_col: calc(var(--wrapper_w) / 12);
+  --wrapper_side_space: calc(var(--wrapper_col) + var(--wrapper_margin));
+  --wrapper_lg_side_space: calc(var(--wrapper_col) / 2 + var(--wrapper_margin));
 }
 
 .dark {
@@ -150,4 +154,151 @@
 
 .border-brand-dark {
   border: var(--border-brand-dark);
+}
+
+
+/* Home Hero */
+
+section {
+  -webkit-transition: color 475ms cubic-bezier(.455, .03, .515, .955);
+  transition: color 475ms cubic-bezier(.455, .03, .515, .955);
+}
+
+.home-intro {
+  --word_spacing: 1.6rem;
+  --icon_size: 6.5rem;
+  --link_trans: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.expertises-marquees {
+  --word_spacing: 1.6rem;
+  --icon_size: 6.5rem;
+  --stroke_color: #f2f2f0;
+  --link_trans: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@media screen and (max-width: 1199px) {
+  .expertises-marquees {
+    --word_spacing: 1.1rem;
+    --icon_size: 4.5rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .expertises-marquees {
+    --word_spacing: 0.8rem;
+    --icon_size: 2.5rem;
+  }
+}
+
+.expertises-marquees__expertise {
+  translate: none;
+  rotate: none;
+  scale: none;
+}
+
+.expertises-marquees__expertise-title-ctn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  translate: none;
+  rotate: none;
+  scale: none;
+  transform: translate(0px, 0px);
+}
+
+.expertises-marquees__expertise:nth-child(2) .expertises-marquees__expertise-title-ctn {
+  margin-left: -14rem;
+}
+
+@media screen and (max-width: 1299px) {
+  .expertises-marquees__expertise:nth-child(2) .expertises-marquees__expertise-title-ctn {
+    margin-left: -10rem;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .expertises-marquees__expertise:nth-child(2) .expertises-marquees__expertise-title-ctn {
+    margin-left: calc((var(--icon_size) + var(--word_spacing))* -1);
+  }
+}
+
+.expertises-marquees__expertise-link {
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  -o-user-select: text;
+
+  font-size: 2.78rem;
+  font-family: IntegralCF, sans-serif;
+  font-weight: 900;
+  line-height: 1em;
+  text-transform: uppercase;
+
+  -webkit-text-stroke-width: 0px;
+  letter-spacing: .02em;
+
+  display: inline-block;
+  color: #222;
+  -webkit-transition: color 475ms cubic-bezier(.455, .03, .515, .955);
+  transition: color 475ms cubic-bezier(.455, .03, .515, .955);
+  -ms-hyphens: unset !important;
+  hyphens: unset !important;
+}
+
+@media screen and (min-width:768px) {
+  .expertises-marquees__expertise-link {
+    font-size: 5.125rem;
+    -webkit-text-stroke-width: 1px;
+  }
+}
+
+@media screen and (min-width:1200px) {
+  .expertises-marquees__expertise-link {
+    font-size: 7.1111111111rem;
+    -webkit-text-stroke-width: .1rem;
+  }
+}
+
+.expertises-marquees__expertise-link a,
+.expertises-marquees__expertise-link::after,
+.expertises-marquees__expertise-link::before {
+  line-height: 1.1em;
+}
+
+.expertises-marquees__expertise-link::after,
+.expertises-marquees__expertise-link::before {
+  content: attr(data-title);
+  position: absolute;
+  top: 0;
+  color: transparent;
+  -webkit-text-stroke: .1rem var(--stroke_color);
+  transition: color var(--link_trans), -webkit-text-stroke 475ms cubic-bezier(.455, .03, .515, .955);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.expertises-marquees__expertise:nth-child(odd) .expertises-marquees__expertise-link::before {
+  right: 0;
+}
+
+.expertises-marquees__expertise:nth-child(even) .expertises-marquees__expertise-link::after {
+  left: 0;
+}
+
+.expertises-marquees__expertise:nth-child(odd) .expertises-marquees__expertise-link::after {
+  left: 100%;
+  margin-left: var(--word_spacing);
+  /* padding-left: calc(var(--word_spacing) + var(--icon_size)); */
+}
+
+.expertises-marquees__expertise:nth-child(even) .expertises-marquees__expertise-link::before {
+  right: 100%;
+  /* padding-right: calc(var(--word_spacing) + var(--icon_size)); */
+  margin-right: var(--word_spacing);
 }

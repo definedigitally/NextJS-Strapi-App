@@ -3,7 +3,7 @@ import Image, { StaticImageData } from "next/image"
 import Team1 from '@/public/images/James Lee.png'
 import { cn } from "@/lib/utils"
 import SectionWrapper from "../SectionWrapper"
-import { BendArrowDown } from "../icons.svg"
+import { BendArrowDown } from "../Icons"
 
 export default function TeamSection() {
     return (
