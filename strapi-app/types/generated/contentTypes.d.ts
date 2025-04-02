@@ -369,9 +369,37 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBlogBlog extends Struct.SingleTypeSchema {
+  collectionName: 'blogs';
+  info: {
+    description: '';
+    displayName: 'Blog';
+    pluralName: 'blogs';
+    singularName: 'blog';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Blog_Card: Schema.Attribute.Component<'card.blog-card', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Section_Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiBrandInfoBrandInfo extends Struct.SingleTypeSchema {
   collectionName: 'brand_infos';
   info: {
+    description: '';
     displayName: 'Brand Info';
     pluralName: 'brand-infos';
     singularName: 'brand-info';
@@ -381,7 +409,6 @@ export interface ApiBrandInfoBrandInfo extends Struct.SingleTypeSchema {
   };
   attributes: {
     Address: Schema.Attribute.Text;
-    Brand_About: Schema.Attribute.RichText;
     Brand_Name: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -414,6 +441,66 @@ export interface ApiBrandInfoBrandInfo extends Struct.SingleTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     X_Link: Schema.Attribute.String;
+  };
+}
+
+export interface ApiHomeAboutHomeAbout extends Struct.SingleTypeSchema {
+  collectionName: 'home_abouts';
+  info: {
+    displayName: 'Home About';
+    pluralName: 'home-abouts';
+    singularName: 'home-about';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Button_Link: Schema.Attribute.String;
+    Content: Schema.Attribute.RichText;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::home-about.home-about'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiHomeHeroSectionHomeHeroSection
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'home_hero_sections';
+  info: {
+    displayName: 'Home Hero Section';
+    pluralName: 'home-hero-sections';
+    singularName: 'home-hero-section';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Heading: Schema.Attribute.String;
+    Heading_Content: Schema.Attribute.Text;
+    Heading_Tagline: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::home-hero-section.home-hero-section'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -960,7 +1047,10 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::blog.blog': ApiBlogBlog;
       'api::brand-info.brand-info': ApiBrandInfoBrandInfo;
+      'api::home-about.home-about': ApiHomeAboutHomeAbout;
+      'api::home-hero-section.home-hero-section': ApiHomeHeroSectionHomeHeroSection;
       'api::team-user.team-user': ApiTeamUserTeamUser;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

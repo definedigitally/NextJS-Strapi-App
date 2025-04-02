@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "home_hero_sections",
+  "info": {
+    "singularName": "home-hero-section",
+    "pluralName": "home-hero-sections",
+    "displayName": "Home Hero Section"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Heading": {
+      "type": "string"
+    },
+    "Heading_Tagline": {
+      "type": "string"
+    },
+    "Heading_Content": {
+      "type": "text"
+    }
+  }
+}

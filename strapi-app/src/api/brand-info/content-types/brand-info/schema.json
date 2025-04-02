@@ -4,7 +4,8 @@
   "info": {
     "singularName": "brand-info",
     "pluralName": "brand-infos",
-    "displayName": "Brand Info"
+    "displayName": "Brand Info",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,9 +13,6 @@
   "attributes": {
     "Brand_Name": {
       "type": "string"
-    },
-    "Brand_About": {
-      "type": "richtext"
     },
     "Address": {
       "type": "text"
@@ -29,28 +27,31 @@
       "type": "biginteger"
     },
     "Logo_Light": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "Logo_Dark": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "Favicon_Icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "X_Link": {
       "type": "string"
