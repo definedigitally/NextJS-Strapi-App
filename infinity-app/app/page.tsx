@@ -1,5 +1,3 @@
-'use client'
-
 import BlogSection from "@/components/sections/BlogSection";
 // import Hero from "@/components/hero";
 import TeamSection from "@/components/sections/TeamSection";
@@ -9,8 +7,6 @@ import InfoHeroIntro from "@/components/sections/InfoHeroIntro";
 import { Beyond9To5 } from "@/components/sections/Beyond9To5";
 import HomeHero from "@/components/sections/HomeHero";
 import Header from "@/components/Header";
-import CursorFollower from "@/components/cursor-follower";
-import { useEffect, useState } from "react";
 const teamMembers = [
   {
     name: "FLIPDD",
@@ -51,23 +47,10 @@ const teamMembers = [
 ]
 
 export default function Home() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-
-    window.addEventListener("mousemove", handleMouseMove)
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove)
-    }
-  }, [])
+  
   return (
     <main className="min-h-screen">
       <Header />
-      <CursorFollower position={mousePosition} />
       <HomeHero />
       <InfoHeroIntro />
       <TeamShowcase

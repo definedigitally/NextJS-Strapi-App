@@ -400,35 +400,6 @@ export interface ApiBeyondWorkGalleryBeyondWorkGallery
   };
 }
 
-export interface ApiBlogBlog extends Struct.SingleTypeSchema {
-  collectionName: 'blogs';
-  info: {
-    description: '';
-    displayName: 'Blog Section';
-    pluralName: 'blogs';
-    singularName: 'blog';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Blog_Card: Schema.Attribute.Component<'card.blog-card', true>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    Section_Title: Schema.Attribute.String;
-    See_All_Button_Link: Schema.Attribute.String;
-    See_All_Button_Text: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiContentPreviewSectionContentPreviewSection
   extends Struct.SingleTypeSchema {
   collectionName: 'content_preview_sections';
@@ -1173,7 +1144,6 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::beyond-work-gallery.beyond-work-gallery': ApiBeyondWorkGalleryBeyondWorkGallery;
-      'api::blog.blog': ApiBlogBlog;
       'api::content-preview-section.content-preview-section': ApiContentPreviewSectionContentPreviewSection;
       'api::hero-paragraph-section.hero-paragraph-section': ApiHeroParagraphSectionHeroParagraphSection;
       'api::home-hero-section.home-hero-section': ApiHomeHeroSectionHomeHeroSection;
