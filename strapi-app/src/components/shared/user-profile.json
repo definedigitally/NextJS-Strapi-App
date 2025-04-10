@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_shared_user_profiles",
+  "info": {
+    "displayName": "User Profile",
+    "icon": "user"
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

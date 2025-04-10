@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "hero_paragraph_sections",
+  "info": {
+    "singularName": "hero-paragraph-section",
+    "pluralName": "hero-paragraph-sections",
+    "displayName": "Hero Paragraph Section"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Content": {
+      "type": "richtext"
+    },
+    "Button_Text": {
+      "type": "string"
+    },
+    "Button_Link": {
+      "type": "string"
+    },
+    "Background_Color": {
+      "type": "string",
+      "default": "#F44336"
+    }
+  }
+}

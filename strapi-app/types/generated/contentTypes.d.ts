@@ -369,11 +369,42 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBeyondWorkGalleryBeyondWorkGallery
+  extends Struct.SingleTypeSchema {
+  collectionName: 'beyond_work_galleries';
+  info: {
+    displayName: 'Beyond Work Gallery';
+    pluralName: 'beyond-work-galleries';
+    singularName: 'beyond-work-gallery';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Caption: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Gallery_Items: Schema.Attribute.Component<'shared.gallery-items', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::beyond-work-gallery.beyond-work-gallery'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiBlogBlog extends Struct.SingleTypeSchema {
   collectionName: 'blogs';
   info: {
     description: '';
-    displayName: 'Blog';
+    displayName: 'Blog Section';
     pluralName: 'blogs';
     singularName: 'blog';
   };
@@ -390,72 +421,62 @@ export interface ApiBlogBlog extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     Section_Title: Schema.Attribute.String;
+    See_All_Button_Link: Schema.Attribute.String;
+    See_All_Button_Text: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
   };
 }
 
-export interface ApiBrandInfoBrandInfo extends Struct.SingleTypeSchema {
-  collectionName: 'brand_infos';
+export interface ApiContentPreviewSectionContentPreviewSection
+  extends Struct.SingleTypeSchema {
+  collectionName: 'content_preview_sections';
   info: {
-    description: '';
-    displayName: 'Brand Info';
-    pluralName: 'brand-infos';
-    singularName: 'brand-info';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Address: Schema.Attribute.Text;
-    Brand_Name: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    Email: Schema.Attribute.Email;
-    Facebook_Link: Schema.Attribute.String;
-    Favicon_Icon: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    Instagram_Link: Schema.Attribute.String;
-    Linkedin_Link: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::brand-info.brand-info'
-    > &
-      Schema.Attribute.Private;
-    Logo_Dark: Schema.Attribute.Media<'images'>;
-    Logo_Light: Schema.Attribute.Media<'images'>;
-    Phone: Schema.Attribute.BigInteger &
-      Schema.Attribute.SetMinMax<
-        {
-          max: '10';
-          min: '10';
-        },
-        string
-      >;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    X_Link: Schema.Attribute.String;
-  };
-}
-
-export interface ApiHomeAboutHomeAbout extends Struct.SingleTypeSchema {
-  collectionName: 'home_abouts';
-  info: {
-    displayName: 'Home About';
-    pluralName: 'home-abouts';
-    singularName: 'home-about';
+    displayName: 'Content Preview Section';
+    pluralName: 'content-preview-sections';
+    singularName: 'content-preview-section';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     Button_Link: Schema.Attribute.String;
+    Button_Text: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::content-preview-section.content-preview-section'
+    > &
+      Schema.Attribute.Private;
+    Preview_Card: Schema.Attribute.Component<'shared.items', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    Title: Schema.Attribute.RichText;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiHeroParagraphSectionHeroParagraphSection
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'hero_paragraph_sections';
+  info: {
+    displayName: 'Hero Paragraph Section';
+    pluralName: 'hero-paragraph-sections';
+    singularName: 'hero-paragraph-section';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Background_Color: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#F44336'>;
+    Button_Link: Schema.Attribute.String;
+    Button_Text: Schema.Attribute.String;
     Content: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -463,7 +484,7 @@ export interface ApiHomeAboutHomeAbout extends Struct.SingleTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::home-about.home-about'
+      'api::hero-paragraph-section.hero-paragraph-section'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
@@ -504,34 +525,138 @@ export interface ApiHomeHeroSectionHomeHeroSection
   };
 }
 
-export interface ApiTeamUserTeamUser extends Struct.CollectionTypeSchema {
-  collectionName: 'team_users';
+export interface ApiProductTeamSectionProductTeamSection
+  extends Struct.SingleTypeSchema {
+  collectionName: 'product_team_sections';
   info: {
-    displayName: 'Team User';
-    pluralName: 'team-users';
-    singularName: 'team-user';
+    displayName: 'Product Team Section';
+    pluralName: 'product-team-sections';
+    singularName: 'product-team-section';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    Caption: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Linkedin_Link: Schema.Attribute.String;
+    Headline: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::team-user.team-user'
+      'api::product-team-section.product-team-section'
     > &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String & Schema.Attribute.Required;
-    Profile_Avatar: Schema.Attribute.Media<'images'>;
-    Profile_Image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    Role: Schema.Attribute.String & Schema.Attribute.Required;
-    Twitter_Link: Schema.Attribute.String;
+    Team_Member_Card: Schema.Attribute.Component<'shared.members', true>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSiteFooterSiteFooter extends Struct.SingleTypeSchema {
+  collectionName: 'site_footers';
+  info: {
+    description: '';
+    displayName: 'Site Footer';
+    pluralName: 'site-footers';
+    singularName: 'site-footer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Address: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Footer_Link: Schema.Attribute.Component<'shared.footer-navigation', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::site-footer.site-footer'
+    > &
+      Schema.Attribute.Private;
+    Logo_Dark: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    Logo_Light: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    Phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    Social_Link: Schema.Attribute.Component<'shared.social-links', true>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSiteHeaderSiteHeader extends Struct.SingleTypeSchema {
+  collectionName: 'site_headers';
+  info: {
+    displayName: 'Site Header';
+    pluralName: 'site-headers';
+    singularName: 'site-header';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::site-header.site-header'
+    > &
+      Schema.Attribute.Private;
+    Logo_Dark: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    Logo_Light: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    Nav_Link: Schema.Attribute.Component<'shared.navigation-items', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiStartupTeamSectionStartupTeamSection
+  extends Struct.SingleTypeSchema {
+  collectionName: 'startup_team_sections';
+  info: {
+    displayName: 'Startup Team Section';
+    pluralName: 'startup-team-sections';
+    singularName: 'startup-team-section';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Caption: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Headline: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::startup-team-section.startup-team-section'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Startup_Card: Schema.Attribute.Component<'shared.startups', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1047,11 +1172,15 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::beyond-work-gallery.beyond-work-gallery': ApiBeyondWorkGalleryBeyondWorkGallery;
       'api::blog.blog': ApiBlogBlog;
-      'api::brand-info.brand-info': ApiBrandInfoBrandInfo;
-      'api::home-about.home-about': ApiHomeAboutHomeAbout;
+      'api::content-preview-section.content-preview-section': ApiContentPreviewSectionContentPreviewSection;
+      'api::hero-paragraph-section.hero-paragraph-section': ApiHeroParagraphSectionHeroParagraphSection;
       'api::home-hero-section.home-hero-section': ApiHomeHeroSectionHomeHeroSection;
-      'api::team-user.team-user': ApiTeamUserTeamUser;
+      'api::product-team-section.product-team-section': ApiProductTeamSectionProductTeamSection;
+      'api::site-footer.site-footer': ApiSiteFooterSiteFooter;
+      'api::site-header.site-header': ApiSiteHeaderSiteHeader;
+      'api::startup-team-section.startup-team-section': ApiStartupTeamSectionStartupTeamSection;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

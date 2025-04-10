@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_shared_items",
+  "info": {
+    "displayName": "Items",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "Category": {
+      "type": "string"
+    },
+    "Date": {
+      "type": "date"
+    },
+    "ReadTime": {
+      "type": "biginteger"
+    },
+    "Slug": {
+      "type": "string"
+    }
+  }
+}

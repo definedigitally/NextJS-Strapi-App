@@ -1,7 +1,6 @@
 'use client'
 
 import BlogSection from "@/components/sections/BlogSection";
-import { Footer } from "@/components/sections/Footer";
 // import Hero from "@/components/hero";
 import TeamSection from "@/components/sections/TeamSection";
 import Team1 from '@/public/images/James Lee.png'
@@ -91,7 +90,6 @@ export default function Home() {
       />
       <TeamSection />
       <BlogSection />
-      <Footer />
     </main>
   );
 }

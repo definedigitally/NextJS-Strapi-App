@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_shared_members",
+  "info": {
+    "displayName": "Members",
+    "icon": "user"
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Role": {
+      "type": "string"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "Description": {
+      "type": "text"
+    }
+  }
+}
