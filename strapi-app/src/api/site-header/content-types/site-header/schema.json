@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "site_headers",
+  "info": {
+    "singularName": "site-header",
+    "pluralName": "site-headers",
+    "displayName": "Site Header"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Logo_Dark": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "Logo_Light": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "Nav_Link": {
+      "displayName": "Navigation Items",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.navigation-items"
+    }
+  }
+}

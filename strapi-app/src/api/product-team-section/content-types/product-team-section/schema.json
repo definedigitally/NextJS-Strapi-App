@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "product_team_sections",
+  "info": {
+    "singularName": "product-team-section",
+    "pluralName": "product-team-sections",
+    "displayName": "Product Team Section"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Headline": {
+      "type": "string"
+    },
+    "Caption": {
+      "type": "string"
+    },
+    "Team_Member_Card": {
+      "displayName": "Members",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.members"
+    }
+  }
+}

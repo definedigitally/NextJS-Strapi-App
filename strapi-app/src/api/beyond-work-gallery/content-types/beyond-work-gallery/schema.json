@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "beyond_work_galleries",
+  "info": {
+    "singularName": "beyond-work-gallery",
+    "pluralName": "beyond-work-galleries",
+    "displayName": "Beyond Work Gallery"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Caption": {
+      "type": "string"
+    },
+    "Gallery_Items": {
+      "displayName": "Gallery Items",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.gallery-items"
+    }
+  }
+}

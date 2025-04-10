@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "startup_team_sections",
+  "info": {
+    "singularName": "startup-team-section",
+    "pluralName": "startup-team-sections",
+    "displayName": "Startup Team Section"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Headline": {
+      "type": "string"
+    },
+    "Caption": {
+      "type": "string"
+    },
+    "Startup_Card": {
+      "displayName": "Startups",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.startups"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "content_preview_sections",
+  "info": {
+    "singularName": "content-preview-section",
+    "pluralName": "content-preview-sections",
+    "displayName": "Content Preview Section"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "richtext"
+    },
+    "Button_Text": {
+      "type": "string"
+    },
+    "Button_Link": {
+      "type": "string"
+    },
+    "Preview_Card": {
+      "displayName": "Items",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.items"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_shared_startups",
+  "info": {
+    "displayName": "Startups",
+    "icon": "dashboard"
+  },
+  "options": {},
+  "attributes": {
+    "Startup_Name": {
+      "type": "string"
+    },
+    "Person_Name": {
+      "type": "string"
+    },
+    "Role": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "LinkedIn": {
+      "type": "string"
+    },
+    "Twitter": {
+      "type": "string"
+    },
+    "Website": {
+      "type": "string"
+    }
+  }
+}
