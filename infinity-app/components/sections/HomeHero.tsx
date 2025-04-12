@@ -5,8 +5,23 @@ import { useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { SlopyCurvyArrow } from "../Icons";
+import CursorFollower from "../cursor-follower";
 
 export default function HomeHero() {
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            setMousePosition({ x: e.clientX, y: e.clientY })
+        }
+
+        window.addEventListener("mousemove", handleMouseMove)
+
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove)
+        }
+    }, [])
+
     gsap.registerPlugin(ScrollTrigger);
     const [activeWord, setActiveWord] = useState<string | null>(null);
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -147,89 +162,92 @@ export default function HomeHero() {
     };
 
     return (
-        <section ref={sectionRef} className="home-intro px-0 py-16 xl:py-32 flex items-center justify-center w-full h-full xl:min-h-dvh overflow-hidden">
-            <div className="home-intro__wrapper bg-white w-[calc(100%-2rem)] xl:w-[calc(calc(100vw-2.5rem*2)-calc(calc(100vw-2.5rem*2)/12)*1.5)] max-w-[2048px] mx-auto mt-20">
-                <div className="expertises-marquees">
-                    <div ref={productRef} className="expertises-marquees__expertise mb-4 xl:mb-8 flex [transform:translate3d(4rem,0px,0px)]">
-                        <div className="expertises-marquees__expertise-title-ctn relative">
-                            <h1 onMouseEnter={() => handleWordHover("PRODUCT")}
-                                onMouseLeave={handleWordLeave} data-title="PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT "
-                                className={cn("expertises-marquees__expertise-link u-text-stroke hover:cursor-pointer",
-                                    activeWord === "PRODUCT" && "expertises-marquees__expertise-link-active")}>
-                                PRODUCT</h1>
-                            <p
-                                ref={(el) => {
-                                    if (el) taglineRefs.current[0] = el;
-                                }}
-                                className="hidden lg:flex absolute w-full h-full top-0 items-center right-[-110%] whitespace-nowrap text-sm italic xl:text-3xl text-[#222222]"
-                            >
-                                {taglines.PRODUCT}
-                            </p>
+        <>
+            <CursorFollower position={mousePosition} />
+            <section ref={sectionRef} className="home-intro px-0 py-16 xl:py-32 flex items-center justify-center w-full h-full xl:min-h-dvh overflow-hidden">
+                <div className="home-intro__wrapper bg-white w-[calc(100%-2rem)] xl:w-[calc(calc(100vw-2.5rem*2)-calc(calc(100vw-2.5rem*2)/12)*1.5)] max-w-[2048px] mx-auto mt-20">
+                    <div className="expertises-marquees">
+                        <div ref={productRef} className="expertises-marquees__expertise mb-4 xl:mb-8 flex [transform:translate3d(4rem,0px,0px)]">
+                            <div className="expertises-marquees__expertise-title-ctn relative">
+                                <h1 onMouseEnter={() => handleWordHover("PRODUCT")}
+                                    onMouseLeave={handleWordLeave} data-title="PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT "
+                                    className={cn("expertises-marquees__expertise-link u-text-stroke hover:cursor-pointer",
+                                        activeWord === "PRODUCT" && "expertises-marquees__expertise-link-active")}>
+                                    PRODUCT</h1>
+                                <p
+                                    ref={(el) => {
+                                        if (el) taglineRefs.current[0] = el;
+                                    }}
+                                    className="hidden lg:flex absolute w-full h-full top-0 items-center right-[-110%] whitespace-nowrap text-sm italic xl:text-3xl text-[#222222]"
+                                >
+                                    {taglines.PRODUCT}
+                                </p>
+                            </div>
+                        </div>
+                        <div ref={pitchRef} className="expertises-marquees__expertise mb-4 xl:mb-8 flex [transform:translate3d(0px,0px,0px)] justify-center">
+                            <div className="expertises-marquees__expertise-title-ctn relative m-0">
+                                <h1 onMouseEnter={() => handleWordHover("PITCH")}
+                                    onMouseLeave={handleWordLeave} data-title="PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH "
+                                    className={cn("expertises-marquees__expertise-link u-text-stroke hover:cursor-pointer",
+                                        activeWord === "PITCH" && "expertises-marquees__expertise-link-active")}>
+                                    PITCH</h1>
+                                <p
+                                    ref={(el) => {
+                                        if (el) taglineRefs.current[1] = el;
+                                    }}
+                                    className="hidden lg:flex absolute w-full h-full top-0 items-center right-[-110%] whitespace-nowrap text-sm italic xl:text-3xl text-[#222222]">
+                                    {taglines.PITCH}
+                                </p>
+                            </div>
+                        </div>
+                        <div ref={passionRef} className="expertises-marquees__expertise mb-4 xl:mb-8 flex [transform:translate3d(-5rem,0px,0px)] justify-end">
+                            <div className="expertises-marquees__expertise-title-ctn relative m-0">
+                                <h1 onMouseEnter={() => handleWordHover("PASSION")}
+                                    onMouseLeave={handleWordLeave} data-title="PASSION PASSION PASSION PASSION PASSION PASSION PASSION PASSION PASSION PASSION PASSION "
+                                    className={cn("expertises-marquees__expertise-link u-text-stroke hover:cursor-pointer",
+                                        activeWord === "PASSION" && "expertises-marquees__expertise-link-active")}>
+                                    PASSION</h1>
+                                <p
+                                    ref={(el) => {
+                                        if (el) taglineRefs.current[2] = el;
+                                    }}
+                                    className="hidden lg:flex absolute w-full h-full top-0 items-center left-[-110%] whitespace-nowrap text-sm italic xl:text-3xl text-[#222222]"
+                                >
+                                    {taglines.PASSION}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div ref={pitchRef} className="expertises-marquees__expertise mb-4 xl:mb-8 flex [transform:translate3d(0px,0px,0px)] justify-center">
-                        <div className="expertises-marquees__expertise-title-ctn relative m-0">
-                            <h1 onMouseEnter={() => handleWordHover("PITCH")}
-                                onMouseLeave={handleWordLeave} data-title="PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH PITCH "
-                                className={cn("expertises-marquees__expertise-link u-text-stroke hover:cursor-pointer",
-                                    activeWord === "PITCH" && "expertises-marquees__expertise-link-active")}>
-                                PITCH</h1>
-                            <p
-                                ref={(el) => {
-                                    if (el) taglineRefs.current[1] = el;
-                                }}
-                                className="hidden lg:flex absolute w-full h-full top-0 items-center right-[-110%] whitespace-nowrap text-sm italic xl:text-3xl text-[#222222]">
-                                {taglines.PITCH}
-                            </p>
-                        </div>
-                    </div>
-                    <div ref={passionRef} className="expertises-marquees__expertise mb-4 xl:mb-8 flex [transform:translate3d(-5rem,0px,0px)] justify-end">
-                        <div className="expertises-marquees__expertise-title-ctn relative m-0">
-                            <h1 onMouseEnter={() => handleWordHover("PASSION")}
-                                onMouseLeave={handleWordLeave} data-title="PASSION PASSION PASSION PASSION PASSION PASSION PASSION PASSION PASSION PASSION PASSION "
-                                className={cn("expertises-marquees__expertise-link u-text-stroke hover:cursor-pointer",
-                                    activeWord === "PASSION" && "expertises-marquees__expertise-link-active")}>
-                                PASSION</h1>
-                            <p
-                                ref={(el) => {
-                                    if (el) taglineRefs.current[2] = el;
-                                }}
-                                className="hidden lg:flex absolute w-full h-full top-0 items-center left-[-110%] whitespace-nowrap text-sm italic xl:text-3xl text-[#222222]"
-                            >
-                                {taglines.PASSION}
-                            </p>
-                        </div>
-                    </div>
-                </div>
 
-                <div className="w-full h-full flex items-center justify-center">
-                    {activeWord ? (
-                        <>
+                    <div className="w-full h-full flex items-center justify-center">
+                        {activeWord ? (
+                            <>
+                                <div className="w-full lg:w-1/2 lg:ms-auto flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-5">
+                                    <SlopyCurvyArrow className="size-8 lg:size-16 rotate-90 lg:rotate-0" />
+                                    <div
+                                        ref={dynamicTextRef}
+                                        className="text-center max-w-2xl mx-auto text-base text-[#222222]"
+                                    >
+                                        {dynamicTexts[activeWord as keyof typeof dynamicTexts]}
+                                    </div>
+                                </div>
+                            </>
+                        ) : (
                             <div className="w-full lg:w-1/2 lg:ms-auto flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-5">
                                 <SlopyCurvyArrow className="size-8 lg:size-16 rotate-90 lg:rotate-0" />
                                 <div
                                     ref={dynamicTextRef}
                                     className="text-center max-w-2xl mx-auto text-base text-[#222222]"
                                 >
-                                    {dynamicTexts[activeWord as keyof typeof dynamicTexts]}
+                                    {dynamicTexts.PASSION}
                                 </div>
                             </div>
-                        </>
-                    ) : (
-                        <div className="w-full lg:w-1/2 lg:ms-auto flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-5">
-                            <SlopyCurvyArrow className="size-8 lg:size-16 rotate-90 lg:rotate-0" />
-                            <div
-                                ref={dynamicTextRef}
-                                className="text-center max-w-2xl mx-auto text-base text-[#222222]"
-                            >
-                                {dynamicTexts.PASSION}
-                            </div>
-                        </div>
-                    )}
-                </div>
+                        )}
+                    </div>
 
-            </div>
-        </section>
+                </div>
+            </section>
+        </>
     )
 }
 

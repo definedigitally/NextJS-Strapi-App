@@ -400,35 +400,6 @@ export interface ApiBeyondWorkGalleryBeyondWorkGallery
   };
 }
 
-export interface ApiBlogBlog extends Struct.SingleTypeSchema {
-  collectionName: 'blogs';
-  info: {
-    description: '';
-    displayName: 'Blog Section';
-    pluralName: 'blogs';
-    singularName: 'blog';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Blog_Card: Schema.Attribute.Component<'card.blog-card', true>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    Section_Title: Schema.Attribute.String;
-    See_All_Button_Link: Schema.Attribute.String;
-    See_All_Button_Text: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiContentPreviewSectionContentPreviewSection
   extends Struct.SingleTypeSchema {
   collectionName: 'content_preview_sections';
@@ -461,20 +432,17 @@ export interface ApiContentPreviewSectionContentPreviewSection
   };
 }
 
-export interface ApiHeroParagraphSectionHeroParagraphSection
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'hero_paragraph_sections';
+export interface ApiHeroParagraphHeroParagraph extends Struct.SingleTypeSchema {
+  collectionName: 'hero_paragraphs';
   info: {
-    displayName: 'Hero Paragraph Section';
-    pluralName: 'hero-paragraph-sections';
-    singularName: 'hero-paragraph-section';
+    displayName: 'Hero Paragraph';
+    pluralName: 'hero-paragraphs';
+    singularName: 'hero-paragraph';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Background_Color: Schema.Attribute.String &
-      Schema.Attribute.DefaultTo<'#F44336'>;
     Button_Link: Schema.Attribute.String;
     Button_Text: Schema.Attribute.String;
     Content: Schema.Attribute.RichText;
@@ -484,7 +452,7 @@ export interface ApiHeroParagraphSectionHeroParagraphSection
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::hero-paragraph-section.hero-paragraph-section'
+      'api::hero-paragraph.hero-paragraph'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
@@ -1173,9 +1141,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::beyond-work-gallery.beyond-work-gallery': ApiBeyondWorkGalleryBeyondWorkGallery;
-      'api::blog.blog': ApiBlogBlog;
       'api::content-preview-section.content-preview-section': ApiContentPreviewSectionContentPreviewSection;
-      'api::hero-paragraph-section.hero-paragraph-section': ApiHeroParagraphSectionHeroParagraphSection;
+      'api::hero-paragraph.hero-paragraph': ApiHeroParagraphHeroParagraph;
       'api::home-hero-section.home-hero-section': ApiHomeHeroSectionHomeHeroSection;
       'api::product-team-section.product-team-section': ApiProductTeamSectionProductTeamSection;
       'api::site-footer.site-footer': ApiSiteFooterSiteFooter;

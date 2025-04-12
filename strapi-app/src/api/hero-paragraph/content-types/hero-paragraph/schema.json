@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "hero_paragraphs",
+  "info": {
+    "singularName": "hero-paragraph",
+    "pluralName": "hero-paragraphs",
+    "displayName": "Hero Paragraph"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Content": {
+      "type": "richtext"
+    },
+    "Button_Text": {
+      "type": "string"
+    },
+    "Button_Link": {
+      "type": "string"
+    }
+  }
+}
