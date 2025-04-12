@@ -1,20 +1,35 @@
 'use client'
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { getHeroParagraph } from "@/actions";
 
 // Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-interface InfoHeroIntroProps {
-    className?: string;
+function parseMarkdownToHTML(content: string): string {
+    return content
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // bold
+        .replace(/\n/g, "<br/>"); // optional: handle line breaks
 }
 
-const InfoHeroIntro: React.FC<InfoHeroIntroProps> = ({ className = "" }) => {
+export default function HeroParagraph({ className = "" }: { className?: string }) {
     const sectionRef = useRef<HTMLElement>(null);
     const textRef = useRef<HTMLParagraphElement>(null);
-    const buttonRef = useRef<HTMLButtonElement>(null);
+    const buttonRef = useRef<HTMLAnchorElement>(null);
+
+    const [content, setContent] = useState("");
+    const [buttonText, setButtonText] = useState("");
+    const [buttonLink, setButtonLink] = useState("#");
+
+    useEffect(() => {
+        getHeroParagraph().then(({ content, buttonText, buttonLink }) => {
+            setContent(parseMarkdownToHTML(content));
+            setButtonText(buttonText);
+            setButtonLink(buttonLink);
+        });
+    }, []);
 
     useEffect(() => {
         // Create timeline for the animation
@@ -50,25 +65,25 @@ const InfoHeroIntro: React.FC<InfoHeroIntroProps> = ({ className = "" }) => {
 
     return (
         <section ref={sectionRef} className={`w-full bg-[#222222] ${className}`}>
-            <div className="page-width w-full px-4 lg:px-6 xl:px-[88px] py-5 xl:pt-[249px] xl:pb-[379px]">
+            <div className="page-width w-full max-w-[1440px] mx-auto px-4 lg:px-6 xl:px-[88px] py-5 xl:pt-[249px] xl:pb-[275px]">
                 <div className="w-full h-full flex items-center justify-center">
                     <div className="text-center flex flex-col items-center justify-center gap-12">
-                        <p ref={textRef} className='text-[32px] text-[#F1F1F1]'>
-                            For the past <strong>28 years of circling the sun,</strong> I&apos;ve <strong>built ventures, broken things</strong> (only to fix them better), and <strong>chased ideas</strong> that keep me up at night. <strong>☕ Fueled by endless cups of chai,</strong> I&apos;m always on the hunt for something <strong>crazy good, wildly ambitious, and just a little bit impossible.</strong>
-                        </p>
+                        <p
+                            ref={textRef}
+                            className="text-[32px] text-[#F1F1F1] leading-[1.6]"
+                            dangerouslySetInnerHTML={{ __html: content }}
+                        />
 
-                        <button
+                        <a
                             ref={buttonRef}
-                            type="button"
+                            href={buttonLink}
                             className="uppercase text-white font-normal w-[248px] h-[51px] bg-brand-red rounded-[12px] text-base transition-colors duration-300 flex items-center justify-center"
                         >
-                            Who is anant exactly?
-                        </button>
+                            {buttonText}
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
     );
 };
-
-export default InfoHeroIntro;

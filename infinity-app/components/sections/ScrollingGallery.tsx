@@ -19,7 +19,7 @@ interface GalleryImage {
     height: number
 }
 
-export default function Beyond9To5() {
+export default function ScrollingGallery() {
     const [title, setTitle] = useState("")
     const [caption, setCaption] = useState("")
     const [topRowImages, setTopRowImages] = useState<GalleryImage[]>([])
@@ -30,8 +30,6 @@ export default function Beyond9To5() {
     const captionRef = useRef<HTMLParagraphElement>(null)
     const topRowRef = useRef<HTMLDivElement>(null)
     const bottomRowRef = useRef<HTMLDivElement>(null)
-    const topTweenRef = useRef<GSAPTween | null>(null);
-    const bottomTweenRef = useRef<GSAPTween | null>(null);
 
     useEffect(() => {
         getBeyondWorkGallery().then((data) => {
@@ -43,6 +41,11 @@ export default function Beyond9To5() {
             // console.log('Bottom row:', data.bottomRowImages)
         })
     }, [])
+
+    useEffect(() => {
+        console.log('Top row:', topRowImages)
+        console.log('Bottom row:', bottomRowImages)
+    }, [bottomRowImages, topRowImages])
 
     useEffect(() => {
         // Create a timeline for the section animations
@@ -85,25 +88,11 @@ export default function Beyond9To5() {
 
                 // Bottom row scrolling (LTR)
                 bottomTween = gsap.to(bottomRowRef.current, {
-                    xPercent: -100,
+                    xPercent: -50,
                     ease: "none",
                     duration: 40,
                     repeat: -1,
                 })
-
-                topTweenRef.current = gsap.to(topRowRef.current, {
-                    xPercent: -100,
-                    ease: "none",
-                    duration: 40,
-                    repeat: -1,
-                });
-
-                bottomTweenRef.current = gsap.to(bottomRowRef.current, {
-                    xPercent: -100,
-                    ease: "none",
-                    duration: 40,
-                    repeat: -1,
-                });
             },
             onLeaveBack: () => {
                 topTween.pause()
@@ -116,50 +105,49 @@ export default function Beyond9To5() {
         })
 
         return () => {
+            // Clean up animations when component unmounts
             scrollTrigger.kill()
             topTween?.kill()
             bottomTween?.kill()
-            topTweenRef.current?.kill();
-            bottomTweenRef.current?.kill();
         }
     }, [])
 
     return (
         <section ref={sectionRef} className="w-full py-16 bg-black text-white overflow-hidden">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center xl:pb-[50px] xl:mb-[82px] px-4 lg:px-6 xl:px-[140px] w-full max-w-[1440px] mx-auto">
-                <h2 ref={headingRef} className="text-3xl md:text-4xl lg:text-[40px] font-bold">
-                    {title?.split(" ").map((word, idx) => (
-                        <span key={idx} className={((idx + 1) % 2 === 0) ? "color-brand-red" : ""}>
-                            {word}{" "}
-                        </span>
-                    ))}
-                </h2>
-                <p ref={captionRef} className="text-sm md:text-base italic text-gray-300 max-w-md text-right">{caption}</p>
+            <div className="container mx-auto px-4 mb-12">
+                <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-6">
+                    <h2 ref={headingRef} className="text-4xl md:text-5xl lg:text-6xl font-bold">
+                        {title?.split(" ").map((word, idx) =>
+                            word.toLowerCase() === "9" || word.toLowerCase() === "5" ? (
+                                <span key={idx} className="text-red-500">{word} </span>
+                            ) : (
+                                <span key={idx}>{word} </span>
+                            )
+                        )}
+                    </h2>
+                    <p ref={captionRef} className="text-sm md:text-base italic text-gray-300 max-w-md text-right">{caption}</p>
+                </div>
             </div>
 
             {/* Top row - RTL scrolling */}
             <div className="relative overflow-hidden mb-4 xl:mb-10">
-                <div ref={topRowRef} className="flex gap-4 xl:gap-10 w-fit min-h-full">
+                <div ref={topRowRef} className="flex gap-4 xl:gap-10 w-fit">
                     {/* Double the images to create seamless loop */}
                     {[...topRowImages, ...topRowImages, ...topRowImages, ...topRowImages, ...topRowImages].map((image, index) => (
                         <div
                             key={index}
-                            style={{
-                                minWidth: `${image.width}px`,
-                                minHeight: `${image.height}px`
-                            }}
-                            className={`relative min-h-full rounded-lg group`}
+                            className={`relative w-[${image.width}px] h-[${image.height}px] xl:w-[320px] xl:h-[240px] overflow-hidden rounded-lg group`}
                         >
                             <Image
                                 src={image.src || "/placeholder.svg"}
                                 alt={image.alt}
-                                width={image.width}
-                                height={image.height}
-                                loading="lazy"
-                                className={`transition-transform duration-500 w-full h-full`}
+                                fill
+                                className="object-cover transition-transform duration-500 group-hover:scale-110"
                             />
                             {image.caption && (
-                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">{image.caption}</div>
+                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+                                    <p className="text-white text-center">{image.caption}</p>
+                                </div>
                             )}
                         </div>
                     ))}
@@ -168,24 +156,18 @@ export default function Beyond9To5() {
 
             {/* Bottom row - LTR scrolling */}
             <div className="relative overflow-hidden">
-                <div ref={bottomRowRef} className="flex gap-4 xl:gap-10 w-fit min-h-full">
+                <div ref={bottomRowRef} className="flex gap-4 xl:gap-10 w-fit">
                     {/* Double the images to create seamless loop */}
                     {[...bottomRowImages, ...bottomRowImages, ...bottomRowImages, ...bottomRowImages, ...bottomRowImages].map((image, index) => (
                         <div
                             key={index}
-                            style={{
-                                minWidth: `${image.width}px`,
-                                minHeight: `${image.height}px`
-                            }}
-                            className={`relative min-h-full rounded-lg group`}
+                            className={`relative w-[${image.width}px] h-[${image.height}px] xl:w-[320px] xl:h-[240px] overflow-hidden rounded-lg group`}
                         >
                             <Image
                                 src={image.src || "/placeholder.svg"}
                                 alt={image.alt}
-                                width={image.width}
-                                height={image.height}
-                                loading="lazy"
-                                className={`transition-transform duration-500 w-full h-full`}
+                                fill
+                                className="object-cover transition-transform duration-500 group-hover:scale-110"
                             />
                             {image.caption && (
                                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">

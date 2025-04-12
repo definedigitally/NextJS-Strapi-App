@@ -1,6 +1,14 @@
 "use server";
 
-import { BlogPost, PreviewCardRaw } from "@/types";
+import {
+  BlogPost,
+  GalleryItemRaw,
+  PreviewCardRaw,
+  StartupMemberRaw,
+  TeamMember,
+  TeamMemberProps,
+  TeamMemberRaw,
+} from "@/types";
 
 const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
 
@@ -15,7 +23,7 @@ export async function getSiteFooter() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getImageUrl = (img: any) =>
-    img?.url ? `${STRAPI_URL}${img.url}` : null;
+    img?.url ? `${STRAPI_URL}${img.url}` : "/placeholder.svg";
 
   return {
     address: data.Address,
@@ -37,14 +45,16 @@ export async function getBlogSectionData() {
 
   if (!res.ok) throw new Error("Failed to fetch blog section");
 
-  const { data } = await res.json();
+  const resJson = await res.json();
+  const data = resJson.data;
 
   return {
     title: data.Title,
     buttonText: data.Button_Text,
     buttonLink: data.Button_Link,
-    posts: data.Preview_Card.map(
-      (item: PreviewCardRaw): BlogPost => ({
+    posts: data.Preview_Card.map((item: PreviewCardRaw): BlogPost => {
+      const image = item.Image?.[0];
+      return {
         id: item.id,
         title: item.Title,
         category: item.Category,
@@ -55,8 +65,128 @@ export async function getBlogSectionData() {
         }),
         readTime: `${item.ReadTime} min read`,
         slug: item.Slug,
-        image: item.Image?.url ? `${STRAPI_URL}${item.Image.url}` : null,
-      })
+        image: image ? `${STRAPI_URL}${image.url}` : "/placeholder.svg",
+        altText: image?.alternativeText || item.Title,
+        width: image?.width || 1200,
+        height: image?.height || 600,
+      };
+    }),
+  };
+}
+
+export async function getProductTeamData(): Promise<{
+  title: string;
+  caption: string;
+  members: TeamMember[];
+}> {
+  const res = await fetch(
+    `${STRAPI_URL}/api/product-team-section?populate[Team_Member_Card][populate]=Image`,
+    { cache: "no-store" }
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch Product Team Section");
+
+  const { data } = await res.json();
+
+  return {
+    title: data.Headline,
+    caption: data.Caption,
+    members: data.Team_Member_Card.map((item: TeamMemberRaw): TeamMember => {
+      const image = item.Image?.[0];
+      return {
+        id: item.id,
+        name: item.Name,
+        role: item.Role,
+        content: item.Description,
+        image: image ? `${STRAPI_URL}${image.url}` : "/placeholder.svg",
+        altText: image?.alternativeText || item.Name,
+        width: image?.width || 400,
+        height: image?.height || 400,
+      };
+    }),
+  };
+}
+
+export async function getStartupTeamSection() {
+  const res = await fetch(
+    `${STRAPI_URL}/api/startup-team-section?populate[Startup_Card][populate]=Image`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch startup team section");
+
+  const { data } = await res.json();
+
+  return {
+    title: data.Headline,
+    subtitle: data.Caption,
+    teamMembers: data.Startup_Card.map(
+      (item: StartupMemberRaw): TeamMemberProps => {
+        const image = item.Image?.[0];
+        return {
+          name: item.Person_Name,
+          role: item.Role,
+          content: item.Description,
+          image: image ? `${STRAPI_URL}${image.url}` : "/placeholder.svg",
+          altText: image?.alternativeText || item.Person_Name,
+          width: image?.width || 400,
+          height: image?.height || 400,
+          linkedin: item.LinkedIn,
+          twitter: item.Twitter,
+          website: item.Website,
+        };
+      }
     ),
+  };
+}
+
+export async function getHeroParagraph() {
+  const res = await fetch(`${STRAPI_URL}/api/hero-paragraph`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch hero paragraph");
+
+  const { data } = await res.json();
+
+  return {
+    content: data.Content,
+    buttonText: data.Button_Text,
+    buttonLink: data.Button_Link,
+  };
+}
+
+export async function getBeyondWorkGallery() {
+  const res = await fetch(
+    `${STRAPI_URL}/api/beyond-work-gallery?populate[Gallery_Items][populate]=Image`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch gallery");
+
+  const { data } = await res.json();
+
+  const images = data.Gallery_Items.map((item: GalleryItemRaw) => {
+    const image = item.Image?.[0];
+    return {
+      src: image ? `${STRAPI_URL}${image.url}` : "/placeholder.svg",
+      alt: item.Alt_Text || "Gallery image",
+      caption: item.Caption || undefined,
+      width: image?.width,
+      height: image?.height,
+    };
+  });
+
+  const half = Math.ceil(images.length / 2);
+
+  return {
+    title: data.Title,
+    caption: data.Caption,
+    topRowImages: images.slice(0, half),
+    bottomRowImages: images.slice(half),
   };
 }

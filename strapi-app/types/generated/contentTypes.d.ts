@@ -432,20 +432,17 @@ export interface ApiContentPreviewSectionContentPreviewSection
   };
 }
 
-export interface ApiHeroParagraphSectionHeroParagraphSection
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'hero_paragraph_sections';
+export interface ApiHeroParagraphHeroParagraph extends Struct.SingleTypeSchema {
+  collectionName: 'hero_paragraphs';
   info: {
-    displayName: 'Hero Paragraph Section';
-    pluralName: 'hero-paragraph-sections';
-    singularName: 'hero-paragraph-section';
+    displayName: 'Hero Paragraph';
+    pluralName: 'hero-paragraphs';
+    singularName: 'hero-paragraph';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Background_Color: Schema.Attribute.String &
-      Schema.Attribute.DefaultTo<'#F44336'>;
     Button_Link: Schema.Attribute.String;
     Button_Text: Schema.Attribute.String;
     Content: Schema.Attribute.RichText;
@@ -455,7 +452,7 @@ export interface ApiHeroParagraphSectionHeroParagraphSection
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::hero-paragraph-section.hero-paragraph-section'
+      'api::hero-paragraph.hero-paragraph'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
@@ -1145,7 +1142,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::beyond-work-gallery.beyond-work-gallery': ApiBeyondWorkGalleryBeyondWorkGallery;
       'api::content-preview-section.content-preview-section': ApiContentPreviewSectionContentPreviewSection;
-      'api::hero-paragraph-section.hero-paragraph-section': ApiHeroParagraphSectionHeroParagraphSection;
+      'api::hero-paragraph.hero-paragraph': ApiHeroParagraphHeroParagraph;
       'api::home-hero-section.home-hero-section': ApiHomeHeroSectionHomeHeroSection;
       'api::product-team-section.product-team-section': ApiProductTeamSectionProductTeamSection;
       'api::site-footer.site-footer': ApiSiteFooterSiteFooter;

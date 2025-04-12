@@ -13,12 +13,12 @@ export default async function BlogSection() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[26px] lg:px-[66px]">
                 {posts.map((post: BlogPost) => (
-                    <Link href="#" key={post.id} className="group">
+                    <Link href={`/${post.slug}`} key={post.id} className="group">
                         <div className="bg-white p-3 lg:p-6 rounded-3xl blog-card-shadow overflow-hidden transition-transform duration-300 hover:shadow-md hover:-translate-y-1 flex flex-col items-start gap-6">
                             <div className="relative w-full h-[242px] overflow-hidden rounded-2xl blog-img-shadow">
                                 <Image
                                     src={post.image || "/placeholder.svg"}
-                                    alt={post.title}
+                                    alt={post.altText}
                                     fill
                                     className="object-cover"
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
