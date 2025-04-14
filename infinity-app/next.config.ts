@@ -1,15 +1,24 @@
 import type { NextConfig } from "next";
+import { URL } from "url";
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL;
+if (!STRAPI_URL) {
+  throw new Error("❌ Missing required environment variable: STRAPI_URL");
+}
+
+console.log("STRAPI_URL = ", STRAPI_URL);
+
+const parsed = new URL(STRAPI_URL);
+const protocol = parsed.protocol.replace(":", "") as "http" | "https";
+console.log("protocol = ", protocol);
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
     remotePatterns: [
       {
-        protocol: STRAPI_URL.includes('localhost') ? 'http' : 'https',
-        hostname: STRAPI_URL,
-        pathname: '/uploads/**',
+        protocol,
+        hostname: parsed.hostname,
+        pathname: "/uploads/**",
       },
     ],
   },

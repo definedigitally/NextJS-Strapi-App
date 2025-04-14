@@ -65,7 +65,7 @@ export default function HeroParagraph({ className = "" }: { className?: string }
 
     return (
         <section ref={sectionRef} className={`w-full bg-[#222222] ${className}`}>
-            <div className="page-width w-full max-w-[1440px] mx-auto px-4 lg:px-6 xl:px-[88px] py-5 xl:pt-[249px] xl:pb-[275px]">
+            <div className="page-width py-5 xl:pt-[249px] xl:pb-[275px]">
                 <div className="w-full h-full flex items-center justify-center">
                     <div className="text-center flex flex-col items-center justify-center gap-12">
                         <p

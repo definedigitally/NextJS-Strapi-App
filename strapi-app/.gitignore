@@ -121,8 +121,11 @@ coverage
 # Strapi
 ############################
 
-.env
-.env.production
+# Ignore all env files
+.env*
+# Except the example file
+!.env.example
+
 license.txt
 exports
 .strapi

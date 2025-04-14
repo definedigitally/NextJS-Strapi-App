@@ -17,7 +17,7 @@ export async function Footer() {
 
     return (
         <footer className="p-4 xl:py-[76px] xl:px-[72px] bg-[#191818]">
-            <div className="page-width max-w-[1440px] mx-auto flex flex-col items-start gap-5 xl:gap-10">
+            <div className="page-width flex flex-col items-start gap-5 xl:gap-10">
                 <div className="w-full flex flex-col lg:flex-row items-center justify-between">
                     {footer.logoLight && (
                         <Image
