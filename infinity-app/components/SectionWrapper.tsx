@@ -6,7 +6,7 @@ type Props = {
 export default function SectionWrapper({ children, className = '' }: Props) {
   return (
     <section className={`w-full ${className}`}>
-      <div className="page-width max-w-[1440px] mx-auto px-4 lg:px-6 xl:px-[140px]">
+      <div className="page-width">
         {children}
       </div>
     </section>

@@ -10,7 +10,10 @@ import {
   TeamMemberRaw,
 } from "@/types";
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL;
+if (!STRAPI_URL) {
+  throw new Error("❌ Missing required environment variable: STRAPI_URL");
+}
 
 export async function getSiteFooter() {
   const res = await fetch(`${STRAPI_URL}/api/site-footer?populate=*`, {
