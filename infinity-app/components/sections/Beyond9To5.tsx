@@ -84,12 +84,16 @@ export default function Beyond9To5() {
                 })
 
                 // Bottom row scrolling (LTR)
-                bottomTween = gsap.to(bottomRowRef.current, {
-                    xPercent: -100,
-                    ease: "none",
-                    duration: 40,
-                    repeat: -1,
-                })
+                bottomTween = gsap.fromTo(
+                    bottomRowRef.current,
+                    { xPercent: -100 }, // Start off-screen to the left
+                    {
+                        xPercent: 0, // Scroll to original position
+                        ease: "none",
+                        duration: 40,
+                        repeat: -1,
+                    }
+                )
 
                 topTweenRef.current = gsap.to(topRowRef.current, {
                     xPercent: -100,
@@ -98,12 +102,16 @@ export default function Beyond9To5() {
                     repeat: -1,
                 });
 
-                bottomTweenRef.current = gsap.to(bottomRowRef.current, {
-                    xPercent: -100,
-                    ease: "none",
-                    duration: 40,
-                    repeat: -1,
-                });
+                bottomTweenRef.current = gsap.fromTo(
+                    bottomRowRef.current,
+                    { xPercent: -100 },
+                    {
+                        xPercent: 0,
+                        ease: "none",
+                        duration: 40,
+                        repeat: -1,
+                    }
+                )
             },
             onLeaveBack: () => {
                 topTween.pause()
